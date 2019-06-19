@@ -11,7 +11,7 @@ metadata:
 spec:
   accessModes:
     - ReadOnlyMany
-  storageClassName: "pei-nfs-jar"
+  storageClassName: "nfs-jar"
   resources:
     requests:
       storage: 1Mi
@@ -29,7 +29,7 @@ spec:
         - sleep
         - "3600"
       volumeMounts:
-      - mountPath: "/var/www/html"
+      - mountPath: "/nfsshare"
         name: nfs-jar-volume
   volumes:
     - name: nfs-jar-volume

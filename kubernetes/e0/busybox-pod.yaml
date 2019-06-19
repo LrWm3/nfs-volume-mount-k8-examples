@@ -1,13 +1,7 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: novascotia
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nfs-jar-claim
-  namespace: novascotia
 spec:
   accessModes:
     - ReadOnlyMany
@@ -19,11 +13,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-novascotia
-  namespace: novascotia
+  name: busybox
 spec:
   containers:
-    - name: busybox-novascotia
+    - name: busybox
       image: busybox
       command:
         - sleep

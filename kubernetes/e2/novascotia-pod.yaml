@@ -11,7 +11,7 @@ metadata:
 spec:
   accessModes:
     - ReadOnlyMany
-  storageClassName: "nfs-jar"
+  storageClassName: "novascotia-nfs-jar"
   resources:
     requests:
       storage: 1Mi
