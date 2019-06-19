@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pei
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-jar-claim
+  namespace: pei
+spec:
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: "pei-nfs-jar"
+  resources:
+    requests:
+      storage: 1Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pei
+  namespace: pei
+spec:
+  containers:
+    - name: busybox-pei
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: nfs-jar-volume
+  volumes:
+    - name: nfs-jar-volume
+      persistentVolumeClaim:
+        claimName: nfs-jar-claim
