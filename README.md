@@ -20,7 +20,8 @@ and assess how best to use PV, PVC and volumes on our project.
 ## TLDR: Don't use persistent volumes or persistent volume claims; use the nfs volume plugin directly
 
 This works, requires only 5 additional lines per yaml, with no special config or subsituition, and is generally a 
-set it and forget it type approach. I found a post on stackoverflow about this four experiments into PV experimentation.
+set it and forget it type approach. I found [this post on stackoverflow](https://stackoverflow.com/a/35366775) 
+as I was beginning to set up a fourth PV & PVC experiment.
 
 ```yaml
 apiVersion: v1
