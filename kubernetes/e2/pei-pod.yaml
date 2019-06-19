@@ -19,11 +19,11 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-pei-0
+  name: busybox-0
   namespace: pei
 spec:
   containers:
-    - name: busybox-pei
+    - name: busybox
       image: busybox
       command:
         - sleep
@@ -39,11 +39,11 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-pei-1
+  name: busybox-1
   namespace: pei
 spec:
   containers:
-    - name: busybox-pei
+    - name: busybox
       image: busybox
       command:
         - sleep

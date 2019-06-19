@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: novascotia-nfs-jar
+  name: nfs-jar-0
 spec:
   capacity:
     storage: 5Gi # This size is used to match a volume to a tenents claim
@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pei-nfs-jar
+  name: nfs-jar-1
 spec:
   capacity:
     storage: 5Gi # This size is used to match a volume to a tenents claim
@@ -29,4 +29,3 @@ spec:
     server: double-dutch.ca # Please change this to your NFS server
     path: /public # Please change this to the relevant share
     readOnly: true
-

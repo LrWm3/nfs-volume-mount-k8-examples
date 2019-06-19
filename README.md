@@ -42,8 +42,8 @@ This test has passed.
 Testing to see if I can bind two pods in different namespaces to two different PVC, with both PVC attached to the same 
 PV.
 
-e1 will deploy two namespaces, one called `novascotia`, the other called `pei`. Pods `busybox-novascotia` and 
-`busybox-pei` will be deployed to these namespaces. A persistent volume with `storageClassName: "nfs-jar"` is created.
+e1 will deploy two namespaces, one called `novascotia`, the other called `pei`. Pods `busybox` and 
+`busybox` will be deployed to these namespaces. A persistent volume with `storageClassName: "nfs-jar"` is created.
 Two persistent volume claims, one in `novascotia` and the other in `pei`, both with `storageClassName: "nfs-jar"` are 
 created.
 
@@ -52,23 +52,58 @@ and are requesting less than the total size of the PV.
 
 ```bash
 ## To deploy 
-kubectl apply -f kubernetes/e0
+kubectl apply -f kubernetes/e1
 
 # To verify
 kubectl get pods --all-namespaces
-kubectl exec -it busybox ls /nfsshare
+kubectl exec -it -n novascotia busybox ls /nfsshare
 
 # To clean-up
-kubectl delete -f kubernetes/e0
+kubectl delete -f kubernetes/e1
 ```
 
-Expected output is `busybox-novascotia` & `busybox-pei` are running, and 
-`kubectl exec -it busybox-novascotia ls /nfsshare` & `kubectl exec -it busybox-pei ls /nfsshare` both find files.
+Expected output is `busybox` & `busybox` are running, and 
+`kubectl exec -it busybox ls /nfsshare` & `kubectl exec -it busybox ls /nfsshare` both find files.
 
 Actual output of this test found only one persistent volume bound to one of the persistent volume claims. My conclusions 
 are:
 * PV can only be bound to one PVC at a time
+* PVC will not be bound across namespaces by default
 
 ## e2: Two namespaces, two PV, two PVC, each namespace has two pods, one storageClassName
 
-Testing to see if multiple pods within the namespace can bind to a PVC. Also, a single storage class name is used.
+Testing to see if multiple pods within the namespace can bind to a PVC. Also, a single storage class name is used, to
+see if we could simply create a bunch of PV up-front so that we don't actually need to create a specific storage class
+for each PVC which would like to bind to the PV.
+
+```bash
+## To deploy 
+kubectl apply -f kubernetes/e2
+
+# To verify
+kubectl get pods --all-namespaces
+
+# To clean-up
+kubectl delete -f kubernetes/e2
+```
+
+Expected output is all pods are running in all namespaces.
+
+Actual output is all pods are running in all namespaces.
+
+## e3. e1 again but this time we try and bind to the PVC across namespaces
+
+Lets repeat e1 to see if we can jump the namespace.
+
+```bash
+## To deploy 
+kubectl apply -f kubernetes/e1
+
+# To verify
+kubectl get pods --all-namespaces
+kubectl exec -it -n novascotia busybox ls /nfsshare
+
+# To clean-up
+kubectl delete -f kubernetes/e1
+```
+

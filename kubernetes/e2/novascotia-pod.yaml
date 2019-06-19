@@ -19,11 +19,11 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-novascotia
+  name: busybox
   namespace: novascotia
 spec:
   containers:
-    - name: busybox-novascotia-0
+    - name: busybox-0
       image: busybox
       command:
         - sleep
@@ -39,11 +39,11 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-novascotia-1
+  name: busybox-1
   namespace: novascotia
 spec:
   containers:
-    - name: busybox-novascotia
+    - name: busybox
       image: busybox
       command:
         - sleep
