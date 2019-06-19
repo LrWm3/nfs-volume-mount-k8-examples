@@ -1,0 +1,9 @@
+version: "3"
+services:
+  nfs-client:
+    volumes:
+      - /mnt/nfs-1
+    environment:
+      - SERVER=host.docker.internal
+      - SHARE=nfsshare
+    image: outstand/nfs-client
