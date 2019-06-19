@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadOnlyMany # Access modes are defined below
   persistentVolumeReclaimPolicy: Retain # Reclaim policies are defined below 
-  storageClassName: "novascotia-nfs-jar"
+  storageClassName: "nfs-jar"
   nfs:
     server: double-dutch.ca # Please change this to your NFS server
     path: /public # Please change this to the relevant share
@@ -24,7 +24,7 @@ spec:
   accessModes:
     - ReadOnlyMany # Access modes are defined below
   persistentVolumeReclaimPolicy: Retain # Reclaim policies are defined below 
-  storageClassName: "pei-nfs-jar"
+  storageClassName: "nfs-jar"
   nfs:
     server: double-dutch.ca # Please change this to your NFS server
     path: /public # Please change this to the relevant share

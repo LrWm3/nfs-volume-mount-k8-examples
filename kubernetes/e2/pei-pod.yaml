@@ -11,7 +11,7 @@ metadata:
 spec:
   accessModes:
     - ReadOnlyMany
-  storageClassName: "pei-nfs-jar"
+  storageClassName: "nfs-jar"
   resources:
     requests:
       storage: 1Mi
@@ -19,7 +19,27 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-pei
+  name: busybox-pei-0
+  namespace: pei
+spec:
+  containers:
+    - name: busybox-pei
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+      - mountPath: "/nfsshare"
+        name: nfs-jar-volume
+  volumes:
+    - name: nfs-jar-volume
+      persistentVolumeClaim:
+        claimName: nfs-jar-claim
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pei-1
   namespace: pei
 spec:
   containers:
