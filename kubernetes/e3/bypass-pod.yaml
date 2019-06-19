@@ -19,6 +19,7 @@ spec:
         server: double-dutch.ca
         readOnly: true
 ---
+# Create a second pod to demonstrate multiple pods can bind to the same nfs volume using the nfs volume plugin
 apiVersion: v1
 kind: Pod
 metadata:
