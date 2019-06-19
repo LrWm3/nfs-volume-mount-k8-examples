@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+      - mountPath: "/nfsshare"
+        name: nfs-jar-volume
+  volumes:
+    - name: nfs-jar-volume
+      nfs:
+        path: /public
+        server: double-dutch.ca
+        readOnly: true
